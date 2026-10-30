@@ -3,223 +3,221 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Berkay Market - Üye Girişi & Kayıt</title>
+    <title>Giriş Yap / Üye Ol - Berkay Market</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
-        body { background: #111; color: #fff; display: flex; justify-content: center; align-items: center; min-height: 100vh; padding: 20px; }
+        body { background-color: #f5f5f5; display: flex; justify-content: center; align-items: center; min-height: 100vh; color: #333; padding: 20px; }
         
-        .login-card {
-            background: #1a1a1a;
-            border: 1px solid #333;
-            border-radius: 12px;
-            width: 100%;
-            max-width: 420px;
-            padding: 30px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        .auth-card {
+            background: white; width: 420px; padding: 35px; border-radius: 12px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.08); border: 1px solid #eaeaea;
         }
-
-        .header-title {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-        .header-title h2 { color: #f27a1a; font-size: 22px; font-weight: bold; margin-bottom: 5px; }
-        .header-title p { color: #888; font-size: 12px; }
-
-        /* SOSYAL GİRİŞ BUTONLARI (GERÇEK GOOGLE & APPLE LOGOLARI) */
-        .social-btn {
-            width: 100%;
-            padding: 12px;
-            border-radius: 8px;
-            border: 1px solid #444;
-            background: #222;
-            color: #fff;
-            font-weight: 600;
-            font-size: 14px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 12px;
-            margin-bottom: 12px;
-            transition: background 0.2s, border-color 0.2s;
-        }
-        .social-btn:hover { background: #2a2a2a; border-color: #f27a1a; }
-        .social-btn svg { width: 18px; height: 18px; }
         
-        .divider {
-            text-align: center;
-            border-bottom: 1px solid #333;
-            line-height: 0.1em;
-            margin: 25px 0;
-        }
-        .divider span {
-            background: #1a1a1a;
-            padding: 0 10px;
-            color: #777;
-            font-size: 11px;
-            text-transform: uppercase;
-        }
+        .logo-area { text-align: center; margin-bottom: 25px; }
+        .logo-area h1 { color: #f27a1a; font-size: 26px; font-weight: 900; letter-spacing: -0.5px; }
+        .logo-area span { font-size: 11px; color: #888; display: block; letter-spacing: 2px; margin-top: 2px; }
 
-        /* SEKME SEÇİCİLER */
-        .tabs {
-            display: flex;
-            background: #111;
-            border-radius: 8px;
-            padding: 4px;
-            margin-bottom: 20px;
-            border: 1px solid #333;
+        /* SEKMELER (Giriş Yap / Üye Ol) */
+        .auth-tabs { display: flex; border-bottom: 2px solid #eee; margin-bottom: 25px; }
+        .auth-tab {
+            flex: 1; text-align: center; padding: 10px; font-size: 15px; font-weight: bold;
+            color: #888; cursor: pointer; border-bottom: 2px solid transparent; margin-bottom: -2px; transition: all 0.2s;
         }
-        .tab-btn {
-            flex: 1;
-            background: none;
-            border: none;
-            color: #aaa;
-            padding: 10px;
-            font-weight: 600;
-            font-size: 13px;
-            cursor: pointer;
-            border-radius: 6px;
-            transition: all 0.2s;
-        }
-        .tab-btn.active {
-            background: #f27a1a;
-            color: #fff;
-        }
+        .auth-tab.active { color: #f27a1a; border-bottom-color: #f27a1a; }
 
-        /* FORM ALANLARI */
-        .form-group {
-            margin-bottom: 15px;
-        }
-        .form-group label {
-            display: block;
-            font-size: 12px;
-            color: #ccc;
-            margin-bottom: 6px;
-            font-weight: 500;
-        }
+        .form-container { display: none; }
+        .form-container.active { display: block; }
+
+        .form-group { margin-bottom: 15px; }
+        .form-group label { display: block; font-size: 12px; font-weight: 600; margin-bottom: 6px; color: #444; }
         .form-group input {
-            width: 100%;
-            padding: 12px;
-            background: #111;
-            border: 1px solid #333;
-            border-radius: 8px;
-            color: #fff;
-            font-size: 14px;
-            outline: none;
-            transition: border-color 0.2s;
+            width: 100%; padding: 12px 14px; border: 1.5px solid #ddd; border-radius: 8px;
+            font-size: 14px; outline: none; transition: border-color 0.2s;
         }
-        .form-group input:focus {
-            border-color: #f27a1a;
-        }
+        .form-group input:focus { border-color: #f27a1a; }
+        .password-info { font-size: 11px; color: #888; margin-top: 4px; display: block; }
 
         .submit-btn {
-            width: 100%;
-            background: #f27a1a;
-            color: white;
-            border: none;
-            padding: 14px;
-            border-radius: 8px;
-            font-weight: bold;
-            font-size: 15px;
-            cursor: pointer;
-            margin-top: 10px;
-            transition: background 0.2s;
+            width: 100%; background: #f27a1a; color: white; border: none; padding: 13px;
+            border-radius: 8px; font-weight: bold; cursor: pointer; font-size: 15px; transition: background 0.2s; margin-top: 5px;
         }
         .submit-btn:hover { background: #d96813; }
 
+        /* SOSYAL GİRİŞ BUTONLARI VE RESMİ LOGOLAR */
+        .social-divider {
+            display: flex; align-items: center; text-align: center; margin: 20px 0; color: #aaa; font-size: 12px;
+        }
+        .social-divider::before, .social-divider::after {
+            content: ''; flex: 1; border-bottom: 1px solid #eaeaea;
+        }
+        .social-divider::before { margin-right: 10px; }
+        .social-divider::after { margin-left: 10px; }
+
+        .social-btn {
+            width: 100%; padding: 11px; border-radius: 8px; border: 1.5px solid #ddd; background: white;
+            font-size: 13px; font-weight: 600; color: #444; cursor: pointer; display: flex; align-items: center;
+            justify-content: center; gap: 10px; margin-bottom: 10px; transition: background 0.2s, border-color 0.2s;
+        }
+        .social-btn:hover { background: #fafafa; border-color: #ccc; }
+        .social-icon { width: 18px; height: 18px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+
         .back-link {
-            display: block;
-            text-align: center;
-            margin-top: 20px;
-            color: #888;
-            text-decoration: none;
-            font-size: 13px;
+            display: block; text-align: center; margin-top: 20px; font-size: 13px;
+            color: #666; text-decoration: none; font-weight: 500;
         }
         .back-link:hover { color: #f27a1a; }
     </style>
 </head>
 <body>
 
-    <div class="login-card">
-        <div class="header-title">
-            <h2>Berkay Market Üye Merkezi</h2>
-            <p>Alışverişe başlamak için giriş yapın veya hesap oluşturun.</p>
+    <div class="auth-card">
+        <div class="logo-area">
+            <h1>BERKAY MARKET</h1>
+            <span>GİRİŞ YAP / ÜYE OL</span>
         </div>
 
-        <!-- GERÇEK GOOGLE LOGOSU -->
-        <button class="social-btn" onclick="alert('Google ile giriş simülasyonu başarılı!')">
-            <svg viewBox="0 0 24 24"><path fill="#4285F4" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.82-2.4 3.68v3.05h3.88c2.27-2.09 3.66-5.17 3.66-9.17z"/><path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.13 0-5.78-2.11-6.73-4.96H1.18v3.14C3.15 21.32 7.22 24 12 24z"/><path fill="#FBBC05" d="M5.27 14.24c-.25-.72-.38-1.49-.38-2.24s.13-1.52.38-2.24V6.62H1.18C.43 8.14 0 9.87 0 12s.43 3.86 1.18 5.38l4.09-3.14z"/><path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.22 0 3.15 2.68 1.18 6.62l4.09 3.14c.95-2.85 3.6-4.96 6.73-4.96z"/></svg>
-            Google ile Giriş Yap
-        </button>
-
-        <!-- GERÇEK APPLE LOGOSU -->
-        <button class="social-btn" onclick="alert('Apple ile giriş simülasyonu başarılı!')">
-            <svg viewBox="0 0 24 24" fill="#ffffff"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M15.97 5.78c.64-.78 1.08-1.86.96-2.94-.93.04-2.06.62-2.71 1.4-.58.68-1.09 1.77-.95 2.83 1.04.08 2.06-.51 2.7-1.29z"/></svg>
-            Apple ile Giriş Yap
-        </button>
-
-        <div class="divider"><span>VEYA E-POSTA İLE</span></div>
-
-        <!-- SEKME BUTONLARI -->
-        <div class="tabs">
-            <button class="tab-btn active" id="loginTab" onclick="switchTab('login')">Giriş Yap</button>
-            <button class="tab-btn" id="registerTab" onclick="switchTab('register')">Yeni Üyelik Oluştur</button>
+        <!-- ÜST SEKMELER -->
+        <div class="auth-tabs">
+            <div class="auth-tab active" onclick="switchTab('login')">Giriş Yap</div>
+            <div class="auth-tab" onclick="switchTab('register')">Üye Ol</div>
         </div>
 
-        <!-- FORM -->
-        <form onsubmit="handleAuth(event)">
-            <div class="form-group" id="nameGroup" style="display: none;">
-                <label>Ad Soyad</label>
-                <input type="text" id="fullName" placeholder="Örn: Berkay Şimşek">
-            </div>
+        <!-- GİRİŞ YAP FORMU -->
+        <div id="loginFormContainer" class="form-container active">
+            <form onsubmit="handleLogin(event)">
+                <div class="form-group">
+                    <label>E-posta Adresi</label>
+                    <input type="email" id="loginEmail" placeholder="ornek@ornek.com" required>
+                </div>
+                <div class="form-group">
+                    <label>Şifre</label>
+                    <input type="password" id="loginPassword" placeholder="Şifrenizi girin" required>
+                </div>
+                <button type="submit" class="submit-btn">Giriş Yap</button>
+            </form>
 
-            <div class="form-group">
-                <label>Kullanıcı Adı (E-Posta Adresiniz)</label>
-                <input type="email" id="email" placeholder="ornek@websitesi.com" required>
-            </div>
+            <div class="social-divider">veya sosyal medya ile</div>
 
-            <div class="form-group">
-                <label>Şifre</label>
-                <input type="password" id="password" placeholder="******** (En az 6 karakter)" required>
-            </div>
+            <!-- RESMİ GOOGLE LOGOSU -->
+            <button type="button" class="social-btn" onclick="socialLogin('Google')">
+                <span class="social-icon">
+                    <svg width="18" height="18" viewBox="0 0 24 24">
+                        <path fill="#4285F4" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.82-2.4 3.68v3.05h3.88c2.27-2.09 3.665-5.17 3.665-9.17z"/>
+                        <path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.1-6.72-4.93H1.19v3.15C3.17 21.32 7.23 24 12 24z"/>
+                        <path fill="#FBBC05" d="M5.28 14.27c-.25-.72-.38-1.49-.38-2.27s.13-1.55.38-2.27V6.58H1.19C.43 8.13 0 9.87 0 12s.43 3.87 1.19 5.42l4.09-3.15z"/>
+                        <path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.23 0 3.17 2.68 1.19 6.58l4.09 3.15c.95-2.83 3.6-4.98 6.72-4.98z"/>
+                    </svg>
+                </span> Google ile Giriş Yap
+            </button>
 
-            <button type="submit" class="submit-btn" id="submitBtnText">Giriş Yap ve Alışverişe Başla</button>
-        </form>
+            <!-- RESMİ APPLE LOGOSU -->
+            <button type="button" class="social-btn" onclick="socialLogin('Apple')">
+                <span class="social-icon">
+                    <svg width="18" height="18" viewBox="0 0 170 170">
+                        <path fill="currentColor" d="M150.37 130.25c-2.45 5.66-5.35 10.87-8.71 15.66-4.58 6.53-8.33 11.05-11.22 13.56-4.48 4.12-9.28 6.23-14.42 6.35-3.69 0-8.14-1.05-13.32-3.18-5.19-2.12-9.97-3.17-14.34-3.17-4.58 0-9.49 1.05-14.75 3.17-5.26 2.13-9.5 3.24-12.74 3.35-4.35.13-9.1-1.9-14.25-6.08-3.52-2.9-7.39-7.52-11.62-13.88-6.19-9.35-11.16-19.78-14.92-31.3-3.76-11.53-5.64-22.61-5.64-33.25 0-14.07 3.55-25.1 10.65-33.1 7.1-8 15.93-12.06 26.5-12.06 4.9 0 10.3 1.3 16.2 3.9 5.9 2.6 9.87 3.9 11.92 3.9 1.74 0 5.86-1.37 12.35-4.11 6.5-2.73 12.32-3.9 17.47-3.52 14.13 1.08 25.18 6.79 33.16 17.12-12.16 7.37-18.12 17.75-17.88 31.14.22 10.4 4.22 19.12 12 26.16 5.37 4.9 11.93 7.82 19.68 8.78-2.18 6.64-5.06 13.41-8.64 20.31zM119.22 31.81c0-7.82 2.78-15.15 8.34-21.98 5.56-6.83 12.56-10.74 21.01-11.73.11 1.08.17 2.04.17 2.87 0 7.39-2.8 14.75-8.41 22.09-5.61 7.34-12.59 11.38-20.94 12.12-.11-.98-.17-2.18-.17-3.37z"/>
+                    </svg>
+                </span> Apple ile Giriş Yap
+            </button>
+        </div>
+
+        <!-- YENİ ÜYELİK OLUŞTUR FORMU -->
+        <div id="registerFormContainer" class="form-container">
+            <form onsubmit="handleRegister(event)">
+                <div class="form-group">
+                    <label>Ad Soyad</label>
+                    <input type="text" id="regName" placeholder="Adınızı ve soyadınızı girin" required>
+                </div>
+                <div class="form-group">
+                    <label>Kullanıcı Adı (E-posta Adresi)</label>
+                    <input type="email" id="regEmail" placeholder="ornek@ornek.com" required>
+                </div>
+                <div class="form-group">
+                    <label>Şifre</label>
+                    <input type="password" id="regPassword" placeholder="En az 4 karakter girin" minlength="4" required>
+                    <span class="password-info">Şifreniz en az 4 karakter olmalıdır.</span>
+                </div>
+                <button type="submit" class="submit-btn">Kayıt Ol</button>
+            </form>
+
+            <div class="social-divider">veya sosyal medya ile</div>
+
+            <!-- RESMİ GOOGLE LOGOSU -->
+            <button type="button" class="social-btn" onclick="socialLogin('Google')">
+                <span class="social-icon">
+                    <svg width="18" height="18" viewBox="0 0 24 24">
+                        <path fill="#4285F4" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.82-2.4 3.68v3.05h3.88c2.27-2.09 3.665-5.17 3.665-9.17z"/>
+                        <path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.1-6.72-4.93H1.19v3.15C3.17 21.32 7.23 24 12 24z"/>
+                        <path fill="#FBBC05" d="M5.28 14.27c-.25-.72-.38-1.49-.38-2.27s.13-1.55.38-2.27V6.58H1.19C.43 8.13 0 9.87 0 12s.43 3.87 1.19 5.42l4.09-3.15z"/>
+                        <path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.23 0 3.17 2.68 1.19 6.58l4.09 3.15c.95-2.83 3.6-4.98 6.72-4.98z"/>
+                    </svg>
+                </span> Google ile Üye Ol
+            </button>
+
+            <!-- RESMİ APPLE LOGOSU -->
+            <button type="button" class="social-btn" onclick="socialLogin('Apple')">
+                <span class="social-icon">
+                    <svg width="18" height="18" viewBox="0 0 170 170">
+                        <path fill="currentColor" d="M150.37 130.25c-2.45 5.66-5.35 10.87-8.71 15.66-4.58 6.53-8.33 11.05-11.22 13.56-4.48 4.12-9.28 6.23-14.42 6.35-3.69 0-8.14-1.05-13.32-3.18-5.19-2.12-9.97-3.17-14.34-3.17-4.58 0-9.49 1.05-14.75 3.17-5.26 2.13-9.5 3.24-12.74 3.35-4.35.13-9.1-1.9-14.25-6.08-3.52-2.9-7.39-7.52-11.62-13.88-6.19-9.35-11.16-19.78-14.92-31.3-3.76-11.53-5.64-22.61-5.64-33.25 0-14.07 3.55-25.1 10.65-33.1 7.1-8 15.93-12.06 26.5-12.06 4.9 0 10.3 1.3 16.2 3.9 5.9 2.6 9.87 3.9 11.92 3.9 1.74 0 5.86-1.37 12.35-4.11 6.5-2.73 12.32-3.9 17.47-3.52 14.13 1.08 25.18 6.79 33.16 17.12-12.16 7.37-18.12 17.75-17.88 31.14.22 10.4 4.22 19.12 12 26.16 5.37 4.9 11.93 7.82 19.68 8.78-2.18 6.64-5.06 13.41-8.64 20.31zM119.22 31.81c0-7.82 2.78-15.15 8.34-21.98 5.56-6.83 12.56-10.74 21.01-11.73.11 1.08.17 2.04.17 2.87 0 7.39-2.8 14.75-8.41 22.09-5.61 7.34-12.59 11.38-20.94 12.12-.11-.98-.17-2.18-.17-3.37z"/>
+                    </svg>
+                </span> Apple ile Üye Ol
+            </button>
+        </div>
 
         <a href="index.html" class="back-link">← Ana Sayfaya Geri Dön</a>
     </div>
 
     <script>
-        let isLoginMode = true;
+        function switchTab(tabName) {
+            const tabs = document.querySelectorAll('.auth-tab');
+            tabs.forEach(t => t.classList.remove('active'));
 
-        function switchTab(mode) {
-            const loginTab = document.getElementById('loginTab');
-            const registerTab = document.getElementById('registerTab');
-            const nameGroup = document.getElementById('nameGroup');
-            const submitBtnText = document.getElementById('submitBtnText');
+            document.getElementById('loginFormContainer').classList.remove('active');
+            document.getElementById('registerFormContainer').classList.remove('active');
 
-            if (mode === 'login') {
-                isLoginMode = true;
-                loginTab.classList.add('active');
-                registerTab.classList.remove('active');
-                nameGroup.style.display = 'none';
-                submitBtnText.innerText = 'Giriş Yap ve Alışverişe Başla';
+            if (tabName === 'login') {
+                tabs[0].classList.add('active');
+                document.getElementById('loginFormContainer').classList.add('active');
             } else {
-                isLoginMode = false;
-                registerTab.classList.add('active');
-                loginTab.classList.remove('active');
-                nameGroup.style.display = 'block';
-                submitBtnText.innerText = 'Hesap Oluştur ve Giriş Yap';
+                tabs[1].classList.add('active');
+                document.getElementById('registerFormContainer').classList.add('active');
             }
         }
 
-        function handleAuth(event) {
+        function handleLogin(event) {
             event.preventDefault();
-            if (isLoginMode) {
-                alert('Giriş yapıldı! Ana sayfaya yönlendiriliyorsunuz...');
-            } else {
-                alert('Yeni üyelik başarıyla oluşturuldu! Hoş geldiniz.');
+            const email = document.getElementById('loginEmail').value.trim();
+            const namePart = email.split('@')[0];
+            const formattedName = namePart.charAt(0).toUpperCase() + namePart.slice(1);
+
+            const userData = { name: formattedName, email: email };
+            localStorage.setItem('currentUser', JSON.stringify(userData));
+
+            alert('Giriş başarılı! Ana sayfaya yönlendiriliyorsunuz.');
+            window.location.href = 'index.html';
+        }
+
+        function handleRegister(event) {
+            event.preventDefault();
+            const name = document.getElementById('regName').value.trim();
+            const email = document.getElementById('regEmail').value.trim();
+            const password = document.getElementById('regPassword').value;
+
+            if (password.length < 4) {
+                alert('Şifre en az 4 karakter olmalıdır!');
+                return;
             }
+
+            const userData = { name: name, email: email };
+            localStorage.setItem('currentUser', JSON.stringify(userData));
+
+            alert(`Tebrikler ${name}! Kaydınız başarıyla oluşturuldu.`);
+            window.location.href = 'index.html';
+        }
+
+        function socialLogin(provider) {
+            const userData = { name: `${provider} Kullanıcısı`, email: `user@${provider.toLowerCase()}.com` };
+            localStorage.setItem('currentUser', JSON.stringify(userData));
+            alert(`${provider} ile başarıyla giriş yapıldı!`);
             window.location.href = 'index.html';
         }
     </script>
