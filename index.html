@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Berkay Market - Online Alışveriş</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { background-color: #f5f5f5; color: #333; }
+        header { background: #fff; border-bottom: 1px solid #e5e5e5; padding: 15px 40px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 1000; }
+        .logo-area h1 { color: #f27a1a; font-size: 24px; font-weight: bold; }
+        .logo-area span { font-size: 12px; color: #666; display: block; letter-spacing: 1px; }
+        .search-bar { display: flex; width: 40%; background: #f3f3f3; border-radius: 6px; overflow: hidden; border: 1px solid #ddd; }
+        .search-bar input { width: 100%; padding: 10px 15px; border: none; outline: none; background: transparent; font-size: 14px; }
+        .search-bar button { background: #f27a1a; color: white; border: none; padding: 0 20px; cursor: pointer; font-weight: bold; }
+        .user-actions { display: flex; gap: 20px; align-items: center; }
+        .user-actions a { text-decoration: none; color: #333; font-size: 14px; font-weight: 600; }
+        .user-actions a:hover { color: #f27a1a; }
+        
+        nav.categories { background: #fff; padding: 10px 40px; border-bottom: 1px solid #e5e5e5; display: flex; gap: 30px; font-size: 14px; font-weight: 600; color: #555; }
+        nav.categories a { text-decoration: none; color: #555; cursor: pointer; }
+        nav.categories a:hover, nav.categories a.active { color: #f27a1a; }
+
+        .container { max-width: 1200px; margin: 20px auto; padding: 0 20px; }
+        .banner { background: linear-gradient(135deg, #f27a1a, #ff9f43); color: white; padding: 30px; border-radius: 8px; margin-bottom: 30px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        .banner h2 { font-size: 28px; margin-bottom: 10px; }
+        
+        .section-title { font-size: 20px; font-weight: bold; margin-bottom: 20px; border-left: 4px solid #f27a1a; padding-left: 10px; }
+        
+        .product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 20px; }
+        .product-card { background: white; border-radius: 8px; overflow: hidden; border: 1px solid #eee; transition: transform 0.2s, box-shadow 0.2s; display: flex; flex-direction: column; justify-content: space-between; }
+        .product-card:hover { transform: translateY(-3px); box-shadow: 0 6px 15px rgba(0,0,0,0.1); }
+        
+        .product-img-container { width: 100%; height: 200px; overflow: hidden; background: #f9f9f9; display: flex; align-items: center; justify-content: center; }
+        .product-img-container img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s; }
+        .product-card:hover .product-img-container img { transform: scale(1.05); }
+
+        .product-info { padding: 15px; }
+        .product-category { font-size: 11px; color: #888; text-transform: uppercase; margin-bottom: 5px; }
+        .product-title { font-size: 14px; font-weight: 600; margin-bottom: 10px; color: #333; height: 40px; overflow: hidden; }
+        .product-price { font-size: 18px; font-weight: bold; color: #f27a1a; margin-bottom: 15px; }
+        .add-to-cart { width: 100%; background: #f27a1a; color: white; border: none; padding: 10px; border-radius: 5px; font-weight: bold; cursor: pointer; transition: background 0.2s; }
+        .add-to-cart:hover { background: #d96813; }
+
+        footer { background: #333; color: white; text-align: center; padding: 25px; margin-top: 50px; font-size: 13px; }
+        footer span { color: #f27a1a; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo-area">
+            <h1>BERKAY MARKET</h1>
+            <span>ONLINE ALIŞVERİŞ</span>
+        </div>
+        <div class="search-bar">
+            <input type="text" id="searchInput" placeholder="Ürün, kategori veya marka arayın (Örn: Tişört, Mont)">
+            <button onclick="searchProducts()">Ara</button>
+        </div>
+        <div class="user-actions">
+            <a href="login.html">Giriş Yap</a>
+            <a href="#" id="cartInfo">Sepetim (0)</a>
+        </div>
+    </header>
+
+    <nav class="categories">
+        <a class="active" onclick="filterCategory('Tümü', event)">Tüm Ürünler</a>
+        <a onclick="filterCategory('Giyim', event)">Giyim</a>
+        <a onclick="filterCategory('Elektronik', event)">Elektronik</a>
+        <a onclick="filterCategory('Aksesuar', event)">Aksesuar</a>
+        <a onclick="filterCategory('Fırsatlar', event)">Süper Fırsatlar</a>
+    </nav>
+
+    <div class="container">
+        <div class="banner">
+            <h2>Berkay Market’e Hoş Geldiniz!</h2>
+            <p>Sezonun en trend ürünlerinde dev indirimler ve sürpriz fırsatlar sizi bekliyor.</p>
+        </div>
+
+        <div class="section-title">| Öne Çıkan Ürünler</div>
+
+        <div class="product-grid" id="productGrid">
+            <!-- Ürünler JavaScript ile yüklenecek -->
+        </div>
+    </div>
+
+    <footer>
+        <p>Proje Sahibi & Geliştiricisi: <span>Berkay Şimşek</span></p>
+        <p style="margin-top: 5px; color: #aaa;">Kullanılan Teknolojiler: HTML5, CSS3, JavaScript, Git, Vercel</p>
+    </footer>
+
+    <script>
+        const products = [
+            { id: 1, title: "Erkek Oversize Siyah Tişört", category: "Giyim", price: "249,99 TL", img: "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?w=500&auto=format&fit=crop&q=60" },
+            { id: 2, title: "Kablosuz Bluetooth Kulaklık", category: "Elektronik", price: "899,99 TL", img: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=500&auto=format&fit=crop&q=60" },
+            { id: 3, title: "Unisex Deri Sırt Çantası", category: "Aksesuar", price: "649,99 TL", img: "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=500&auto=format&fit=crop&q=60" },
+            { id: 4, title: "Minimalist Akıllı Saat", category: "Elektronik", price: "1.299,99 TL", img: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=500&auto=format&fit=crop&q=60" },
+            { id: 5, title: "Regular Fit Kapşonlu Sweatshirt", category: "Giyim", price: "499,99 TL", img: "https://images.unsplash.com/photo-1556905055-8f358a7a47b2?w=500&auto=format&fit=crop&q=60" },
+            { id: 6, title: "Şık Güneş Gözlüğü", category: "Aksesuar", price: "349,99 TL", img: "https://images.unsplash.com/photo-1572635196237-14b3f281503f?w=500&auto=format&fit=crop&q=60" },
+            { id: 7, title: "Özel Seri Spor Ayakkabı", category: "Fırsatlar", price: "1.149,99 TL", img: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=500&auto=format&fit=crop&q=60" },
+            { id: 8, title: "Metal Gövdeli Termos", category: "Fırsatlar", price: "299,99 TL", img: "https://images.unsplash.com/photo-1602143407151-7111542de6e8?w=500&auto=format&fit=crop&q=60" }
+        ];
+
+        let cartCount = 0;
+
+        function displayProducts(list) {
+            const grid = document.getElementById('productGrid');
+            grid.innerHTML = '';
+            list.forEach(p => {
+                grid.innerHTML += `
+                    <div class="product-card">
+                        <div class="product-img-container">
+                            <img src="${p.img}" alt="${p.title}">
+                        </div>
+                        <div class="product-info">
+                            <div class="product-category">${p.category}</div>
+                            <div class="product-title">${p.title}</div>
+                            <div class="product-price">${p.price}</div>
+                            <button class="add-to-cart" onclick="addToCart('${p.title}')">Sepete Ekle</button>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+
+        function addToCart(productName) {
+            cartCount++;
+            document.getElementById('cartInfo').innerText = `Sepetim (${cartCount})`;
+            alert(`"${productName}" sepete başarıyla eklendi! 🛒`);
+        }
+
+        function filterCategory(cat, event) {
+            document.querySelectorAll('nav.categories a').forEach(a => a.classList.remove('active'));
+            event.target.classList.add('active');
+
+            if(cat === 'Tümü') {
+                displayProducts(products);
+            } else {
+                const filtered = products.filter(p => p.category === cat);
+                displayProducts(filtered);
+            }
+        }
+
+        function searchProducts() {
+            const query = document.getElementById('searchInput').value.toLowerCase();
+            const filtered = products.filter(p => p.title.toLowerCase().includes(query) || p.category.toLowerCase().includes(query));
+            displayProducts(filtered);
+        }
+
+        displayProducts(products);
+    </script>
+</body>
+</html>
