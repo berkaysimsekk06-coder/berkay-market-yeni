@@ -43,7 +43,7 @@
         /* EN ÜST BİLGİ ÇUBUĞU */
         .top-bar { background: #f8f8f8; font-size: 12px; color: #666; padding: 8px 40px; display: flex; justify-content: space-between; border-bottom: 1px solid #eaeaea; align-items: center; }
         .top-bar-links { display: flex; gap: 20px; align-items: center; }
-        .top-bar-links a { text-decoration: none; color: #666; font-weight: 500; }
+        .top-bar-links a { text-decoration: none; color: #666; font-weight: 500; cursor: pointer; }
         .top-bar-links a:hover { color: #f27a1a; }
         .dark-mode-toggle { background: none; border: none; cursor: pointer; font-size: 14px; font-weight: 600; color: #f27a1a; display: flex; align-items: center; gap: 5px; }
 
@@ -182,13 +182,13 @@
         <p>Online Alışveriş</p>
     </div>
 
-    <!-- EN ÜST BİLGİ ÇUBUĞU -->
+    <!-- EN ÜST BİLGİ ÇUBUĞU (İndirim Kuponlarım ve Yardım Butonları Aktifleştirildi) -->
     <div class="top-bar">
         <span>Berkay Market’e Hoş Geldiniz! Güvenli Alışverişin Adresi.</span>
         <div class="top-bar-links">
-            <a href="#">İndirim Kuponlarım</a>
+            <a onclick="toggleCouponsModal()">İndirim Kuponlarım</a>
             <button class="dark-mode-toggle" onclick="toggleDarkMode()">🌙 Karanlık Mod</button>
-            <a href="#">Yardım</a>
+            <a onclick="toggleHelpModal()">Yardım</a>
         </div>
     </div>
 
@@ -336,6 +336,56 @@
         </div>
     </div>
 
+    <!-- İNDİRİM KUPONLARIM MODALI (YENİ) -->
+    <div class="modal" id="couponsModal" style="justify-content: flex-end;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>İndirim Kuponlarım</h3>
+                <button class="close-modal" onclick="toggleCouponsModal()">&times;</button>
+            </div>
+            <div class="modal-items">
+                <div style="background: #fff5ec; border: 1.5px dashed #f27a1a; padding: 15px; border-radius: 8px; margin-bottom: 10px;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 5px;">
+                        <h4 style="font-size: 15px; color: #f27a1a; font-weight: bold;">BERKAY10</h4>
+                        <span style="background: #f27a1a; color: white; font-size: 10px; padding: 3px 8px; border-radius: 4px; font-weight: bold;">%10 İNDİRİM</span>
+                    </div>
+                    <p style="font-size: 12px; color: #555; line-height: 1.4;">Sepet tutarınızda anında %10 indirim sağlar. Sepet sayfasında kupon kodunu yazarak uygulayabilirsiniz.</p>
+                </div>
+                <div style="background: #fafafa; border: 1.5px dashed #ccc; padding: 15px; border-radius: 8px;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 5px;">
+                        <h4 style="font-size: 15px; color: #333; font-weight: bold;">HOSGELDIN100</h4>
+                        <span style="background: #666; color: white; font-size: 10px; padding: 3px 8px; border-radius: 4px; font-weight: bold;">100 TL İNDİRİM</span>
+                    </div>
+                    <p style="font-size: 12px; color: #555; line-height: 1.4;">İlk alışverişinize özel 100 TL indirim fırsatı.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- YARDIM MODALI (YENİ) -->
+    <div class="modal" id="helpModal" style="justify-content: flex-end;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Yardım & Destek</h3>
+                <button class="close-modal" onclick="toggleHelpModal()">&times;</button>
+            </div>
+            <div class="modal-items" style="font-size: 13px; line-height: 1.5; color: #444;">
+                <div style="background: #fafafa; padding: 12px; border-radius: 6px; border: 1px solid #eee; margin-bottom: 10px;">
+                    <b style="color: #f27a1a;">Siparişimi nasıl takip edebilirim?</b>
+                    <p style="font-size: 12px; color: #666; margin-top: 4px;">Sağ üstteki "Bildirimler" sekmesinden siparişlerinizin durumunu anlık olarak takip edebilirsiniz.</p>
+                </div>
+                <div style="background: #fafafa; padding: 12px; border-radius: 6px; border: 1px solid #eee; margin-bottom: 10px;">
+                    <b style="color: #f27a1a;">İade ve Değişim Koşulları nelerdir?</b>
+                    <p style="font-size: 12px; color: #666; margin-top: 4px;">Satın aldığınız ürünleri 14 gün içinde hiçbir mazeret belirtmeden ücretsiz iade edebilirsiniz.</p>
+                </div>
+                <div style="background: #fafafa; padding: 12px; border-radius: 6px; border: 1px solid #eee;">
+                    <b style="color: #f27a1a;">Canlı Destek ile nasıl görüşürüm?</b>
+                    <p style="font-size: 12px; color: #666; margin-top: 4px;">Sağ alt köşede bulunan "Asistan'a Sor" butonuna tıklayarak müşteri temsilcimizle anında yazışabilirsiniz.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- HARİTALI VE YENİ ADRES EKLENEBİLİR KONUM MODALI -->
     <div class="modal" id="locationModal" style="justify-content: center; align-items: center;">
         <div class="location-modal-box">
@@ -379,16 +429,14 @@
         </div>
     </div>
 
-    <!-- DİNAMİK PROFİL MODALI (OTURUM DURUMUNA GÖRE ŞEKİLLENİR) -->
+    <!-- DİNAMİK PROFİL MODALI -->
     <div class="modal" id="profileModal" style="justify-content: flex-end;">
         <div class="modal-content">
             <div class="modal-header">
                 <h3>Hesabım & Bilgilerim</h3>
                 <button class="close-modal" onclick="toggleProfileModal()">&times;</button>
             </div>
-            <div style="padding: 10px 0; font-size: 14px;" id="profileModalContent">
-                <!-- JavaScript ile dinamik dolacak -->
-            </div>
+            <div style="padding: 10px 0; font-size: 14px;" id="profileModalContent"></div>
         </div>
     </div>
 
@@ -469,7 +517,6 @@
         let activeLocationName = "Ev";
         let activeLocationAddress = "Şenlik Köklü Sokak 35B, Ankara";
 
-        // Sayfa yüklendiğinde profil arayüzünü kontrol et
         window.onload = function() {
             displayProducts(products);
             updateProfileUI();
@@ -483,6 +530,18 @@
             } else {
                 btn.innerHTML = '🌙 Karanlık Mod';
             }
+        }
+
+        // İndirim Kuponlarım Modalı Aç/Kapat
+        function toggleCouponsModal() {
+            const modal = document.getElementById('couponsModal');
+            modal.style.display = modal.style.display === 'flex' ? 'none' : 'flex';
+        }
+
+        // Yardım Modalı Aç/Kapat
+        function toggleHelpModal() {
+            const modal = document.getElementById('helpModal');
+            modal.style.display = modal.style.display === 'flex' ? 'none' : 'flex';
         }
 
         function applyCoupon() {
@@ -508,8 +567,6 @@
             activeLocationAddress = address;
             document.getElementById('mainLocationTitle').innerText = name;
             document.getElementById('mainLocationAddress').innerText = address;
-            
-            // Eğer profil açıkse orayı da güncelle
             updateProfileUI();
             toggleLocationModal();
         }
@@ -541,24 +598,20 @@
             selectAddress(title, details, newItem);
         }
 
-        // DİNAMİK PROFİL YÖNETİMİ (localStorage KONTROLÜ)
         function updateProfileUI() {
             const container = document.getElementById('profileModalContent');
-            // Tarayıcı hafızasından giriş yapmış kullanıcıyı kontrol ediyoruz
             const currentUser = JSON.parse(localStorage.getItem('currentUser'));
 
             if (!currentUser) {
-                // Giriş yapılmadıysa gösterilecek alan
                 container.innerHTML = `
                     <div style="text-align: center; padding: 25px 10px;">
                         <div style="font-size: 40px; margin-bottom: 15px;">👤</div>
                         <h4 style="font-size: 16px; font-weight: bold; margin-bottom: 8px;">Oturum Açılmadı</h4>
                         <p style="font-size: 13px; color: #666; margin-bottom: 20px; line-height: 1.4;">Alışveriş yapmak, siparişlerinizi takip etmek ve favorilerinizi görmek için lütfen giriş yapın.</p>
-                        <a href="login.html" style="display: block; text-align: center; background: #f27a1a; color: white; padding: 12px; border-radius: 6px; text-decoration: none; font-weight: bold; font-size: 14px; margin-bottom: 10px; transition: background 0.2s;">Giriş Yap / Üye Ol</a>
+                        <a href="login.html" style="display: block; text-align: center; background: #f27a1a; color: white; padding: 12px; border-radius: 6px; text-decoration: none; font-weight: bold; font-size: 14px; margin-bottom: 10px;">Giriş Yap / Üye Ol</a>
                     </div>
                 `;
             } else {
-                // Giriş yapıldıysa kullanıcının bilgileri gösterilir
                 container.innerHTML = `
                     <div style="background: #fff5ec; border: 1px solid #f27a1a; padding: 15px; border-radius: 8px; margin-bottom: 20px;">
                         <p style="font-weight: bold; color: #f27a1a; margin-bottom: 5px;">Aktif Oturum</p>
@@ -582,7 +635,7 @@
         }
 
         function toggleProfileModal() {
-            updateProfileUI(); // Her açıldığında güncel oturum durumunu kontrol et
+            updateProfileUI();
             const modal = document.getElementById('profileModal');
             modal.style.display = modal.style.display === 'flex' ? 'none' : 'flex';
         }
@@ -721,6 +774,19 @@
         function toggleNotificationsModal() {
             const modal = document.getElementById('notifModal');
             modal.style.display = modal.style.display === 'flex' ? 'none' : 'flex';
+        }
+
+        function switchNotifTab(type, event) {
+            document.querySelectorAll('.notif-tabs span').forEach(s => s.classList.remove('active'));
+            event.target.classList.add('active');
+            const cards = document.querySelectorAll('.notif-card');
+            cards.forEach(card => {
+                if(type === 'all' || card.getAttribute('data-type') === type) {
+                    card.style.display = 'flex';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
         }
 
         function addToCart(productId) {
