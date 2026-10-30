@@ -170,6 +170,30 @@
         .address-list-item.selected .address-radio { border-color: #f27a1a; background: #f27a1a; }
         .address-list-item.selected .address-radio::after { content: ''; width: 6px; height: 6px; background: white; border-radius: 50%; }
 
+        /* --- MOBİL UYUMLULUK (RESPONSIVE) DÜZENLEMELERİ --- */
+        @media screen and (max-width: 768px) {
+            .top-bar { padding: 6px 15px; font-size: 11px; flex-direction: column; gap: 4px; text-align: center; }
+            .top-bar-links { display: none; }
+            .location-preview-bar { padding: 10px 15px; }
+            .location-text h4 { font-size: 14px; }
+            header { padding: 12px 15px; flex-direction: column; gap: 12px; }
+            .logo-area { text-align: center; width: 100%; }
+            .search-bar { width: 100% !important; }
+            .user-actions { width: 100%; justify-content: space-around; gap: 5px; font-size: 11px; }
+            .action-item span:nth-child(2) { display: none; }
+            nav.categories { padding: 0 15px; gap: 15px; font-size: 13px; }
+            .container { padding: 0 10px; margin: 15px auto; }
+            .banner { padding: 20px; text-align: center; }
+            .banner h2 { font-size: 20px; }
+            .banner p { font-size: 13px; }
+            .product-grid { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 10px; }
+            .product-img-container { height: 160px; }
+            .product-info { padding: 10px; }
+            .product-title { font-size: 12px; height: 34px; }
+            .product-price { font-size: 15px; }
+            .modal-content, .location-modal-box { width: 100% !important; height: 100% !important; border-radius: 0 !important; }
+        }
+
         footer { background: #222; color: white; text-align: center; padding: 30px; margin-top: 60px; font-size: 13px; }
         footer span { color: #f27a1a; font-weight: bold; }
     </style>
@@ -182,7 +206,7 @@
         <p>Online Alışveriş</p>
     </div>
 
-    <!-- EN ÜST BİLGİ ÇUBUĞU (İndirim Kuponlarım ve Yardım Butonları Aktifleştirildi) -->
+    <!-- EN ÜST BİLGİ ÇUBUĞU -->
     <div class="top-bar">
         <span>Berkay Market’e Hoş Geldiniz! Güvenli Alışverişin Adresi.</span>
         <div class="top-bar-links">
@@ -336,7 +360,7 @@
         </div>
     </div>
 
-    <!-- İNDİRİM KUPONLARIM MODALI (YENİ) -->
+    <!-- İNDİRİM KUPONLARIM MODALI -->
     <div class="modal" id="couponsModal" style="justify-content: flex-end;">
         <div class="modal-content">
             <div class="modal-header">
@@ -351,18 +375,11 @@
                     </div>
                     <p style="font-size: 12px; color: #555; line-height: 1.4;">Sepet tutarınızda anında %10 indirim sağlar. Sepet sayfasında kupon kodunu yazarak uygulayabilirsiniz.</p>
                 </div>
-                <div style="background: #fafafa; border: 1.5px dashed #ccc; padding: 15px; border-radius: 8px;">
-                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 5px;">
-                        <h4 style="font-size: 15px; color: #333; font-weight: bold;">HOSGELDIN100</h4>
-                        <span style="background: #666; color: white; font-size: 10px; padding: 3px 8px; border-radius: 4px; font-weight: bold;">100 TL İNDİRİM</span>
-                    </div>
-                    <p style="font-size: 12px; color: #555; line-height: 1.4;">İlk alışverişinize özel 100 TL indirim fırsatı.</p>
-                </div>
             </div>
         </div>
     </div>
 
-    <!-- YARDIM MODALI (YENİ) -->
+    <!-- YARDIM MODALI -->
     <div class="modal" id="helpModal" style="justify-content: flex-end;">
         <div class="modal-content">
             <div class="modal-header">
@@ -373,14 +390,6 @@
                 <div style="background: #fafafa; padding: 12px; border-radius: 6px; border: 1px solid #eee; margin-bottom: 10px;">
                     <b style="color: #f27a1a;">Siparişimi nasıl takip edebilirim?</b>
                     <p style="font-size: 12px; color: #666; margin-top: 4px;">Sağ üstteki "Bildirimler" sekmesinden siparişlerinizin durumunu anlık olarak takip edebilirsiniz.</p>
-                </div>
-                <div style="background: #fafafa; padding: 12px; border-radius: 6px; border: 1px solid #eee; margin-bottom: 10px;">
-                    <b style="color: #f27a1a;">İade ve Değişim Koşulları nelerdir?</b>
-                    <p style="font-size: 12px; color: #666; margin-top: 4px;">Satın aldığınız ürünleri 14 gün içinde hiçbir mazeret belirtmeden ücretsiz iade edebilirsiniz.</p>
-                </div>
-                <div style="background: #fafafa; padding: 12px; border-radius: 6px; border: 1px solid #eee;">
-                    <b style="color: #f27a1a;">Canlı Destek ile nasıl görüşürüm?</b>
-                    <p style="font-size: 12px; color: #666; margin-top: 4px;">Sağ alt köşede bulunan "Asistan'a Sor" butonuna tıklayarak müşteri temsilcimizle anında yazışabilirsiniz.</p>
                 </div>
             </div>
         </div>
@@ -394,13 +403,11 @@
                 <button class="close-modal" onclick="toggleLocationModal()">&times;</button>
             </div>
             
-            <!-- Harita Önizleme Kutusu -->
             <div class="map-preview-container">
                 <img src="https://images.unsplash.com/photo-1526778548025-fa2f459cd5c1?w=600&auto=format&fit=crop&q=60" alt="Harita Görseli">
                 <div class="map-pin-center">📍</div>
             </div>
 
-            <!-- Adres Listesi -->
             <div style="flex: 1; overflow-y: auto; display: flex; flex-direction: column; gap: 8px; max-height: 240px;" id="addressListContainer">
                 <div class="address-list-item selected" onclick="selectAddress('Ev', 'Şenlik Köklü Sokak 35B Ankara 06310', this)">
                     <div class="address-left">
@@ -408,17 +415,6 @@
                         <div>
                             <h4 style="font-size: 14px; font-weight: bold; color: #222;">Ev</h4>
                             <p style="font-size: 12px; color: #666; margin-top: 2px;">Şenlik Köklü Sokak 35B<br>Ankara Ankara 06310</p>
-                        </div>
-                    </div>
-                    <span style="font-size: 16px; color: #888; cursor: pointer;">✏️</span>
-                </div>
-
-                <div class="address-list-item" onclick="selectAddress('Kavaklıdere', 'Kavaklıdere Atatürk Bulvarı 169 Ankara 06680', this)">
-                    <div class="address-left">
-                        <div class="address-radio"></div>
-                        <div>
-                            <h4 style="font-size: 14px; font-weight: bold; color: #222;">Kavaklıdere Atatürk Bulvarı 169</h4>
-                            <p style="font-size: 12px; color: #666; margin-top: 2px;">Ankara Ankara 06680</p>
                         </div>
                     </div>
                     <span style="font-size: 16px; color: #888; cursor: pointer;">✏️</span>
@@ -532,13 +528,11 @@
             }
         }
 
-        // İndirim Kuponlarım Modalı Aç/Kapat
         function toggleCouponsModal() {
             const modal = document.getElementById('couponsModal');
             modal.style.display = modal.style.display === 'flex' ? 'none' : 'flex';
         }
 
-        // Yardım Modalı Aç/Kapat
         function toggleHelpModal() {
             const modal = document.getElementById('helpModal');
             modal.style.display = modal.style.display === 'flex' ? 'none' : 'flex';
